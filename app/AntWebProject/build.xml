@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="AntWebProject" default="war" basedir=".">
+    
+    <!-- プロパティ設定 -->
+    <property name="src.dir" value="src"/>
+    <property name="web.dir" value="src/main/webapp"/>
+    <property name="build.dir" value="build"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="war.file" value="${dist.dir}/AntWebProject.war"/>
+
+    <!-- ディレクトリ作成 -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <!-- コンパイル -->
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}" destdir="${build.dir}"/>
+    </target>
+
+    <!-- WARファイル作成 -->
+    <target name="war" depends="compile">
+        <war destfile="${war.file}" webxml="${web.dir}/WEB-INF/web.xml">
+            <fileset dir="${web.dir}"/>
+            <classes dir="${build.dir}"/>
+        </war>
+    </target>
+
+    <!-- クリーンアップ -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+</project>
