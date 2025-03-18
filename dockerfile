@@ -28,8 +28,5 @@ FROM tomcat:11.0-jdk21-openjdk-slim AS deploy
 # ビルドステージからWARファイルをコピー
 COPY --from=build /app/AntWebProject/dist/AntWebProject.war /usr/local/tomcat/webapps/
 
-# デフォルトのTomcatポートを公開
-EXPOSE 8080
-
 # Tomcatを起動
 CMD ["catalina.sh", "run"]
